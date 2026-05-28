@@ -444,11 +444,9 @@ $app = $vars['app'];
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12 text-center">
-                                <div id="uLogin_eb7899e9" data-uloginid="eb7899e9" data-ulogin="display=buttons"><img
-                                            src="/img/vk-login.jpg" style="max-width: 100%; cursor: pointer;"
-                                            data-uloginbutton="vkontakte"/>
-                                </div>
-
+                                <a href="https://oauth.vk.com/authorize?client_id=<?= VK_ID ?>&redirect_uri=<?= urlencode(VK_REDIRECT_URL) ?>&scope=offline,video,photos,wall,groups,stats&response_type=code&state=/&v=5.64">
+                                    <img src="/img/vk-login.jpg" style="max-width: 100%; cursor: pointer;" alt="Войти через ВКонтакте"/>
+                                </a>
                             </div>
                         </div>
                         <div class="form-group">
