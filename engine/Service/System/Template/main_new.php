@@ -1,6 +1,7 @@
 <?php
 /** @var \System\App $app */
 $app = $vars['app'];
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -98,10 +99,12 @@ $app = $vars['app'];
         } else {
             f();
         }
-    })(document, window, "yandex_metrika_callbacks"); </script>
+    })(document, window, "yandex_metrika_callbacks");
+</script>
 <noscript>
     <div><img src="https://mc.yandex.ru/watch/71322906" style="position:absolute; left:-9999px;" alt=""/></div>
 </noscript> <!-- /Yandex.Metrika counter -->
+
 <header class="main-header">
     <nav id="mainNav" data-spy="affix" data-offset-top="5" class="affix-top">
         <div class="container">
@@ -445,49 +448,6 @@ $app = $vars['app'];
                                             src="/img/vk-login.jpg" style="max-width: 100%; cursor: pointer;"
                                             data-uloginbutton="vkontakte"/>
                                 </div>
-
-<!--                                <div>-->
-<!--                                    <script src="https://unpkg.com/@vkid/sdk@<3.0.0/dist-sdk/umd/index.js"></script>-->
-<!--                                    <script type="text/javascript">-->
-<!--                                        if ('VKIDSDK' in window) {-->
-<!--                                            const VKID = window.VKIDSDK;-->
-<!---->
-<!--                                            VKID.Config.init({-->
-<!--                                                app: 53480581,-->
-<!--                                                redirectUrl: 'http://vk-pro.top/users/social/callback',-->
-<!--                                                responseMode: VKID.ConfigResponseMode.Callback,-->
-<!--                                                source: VKID.ConfigSource.LOWCODE,-->
-<!--                                                scope: 'offline,video,photos,wall,groups,stats', // Заполните нужными доступами по необходимости-->
-<!--                                            });-->
-<!---->
-<!--                                            const oneTap = new VKID.OneTap();-->
-<!---->
-<!--                                            oneTap.render({-->
-<!--                                                container: document.currentScript.parentElement,-->
-<!--                                                showAlternativeLogin: true-->
-<!--                                            })-->
-<!--                                                .on(VKID.WidgetEvents.ERROR, vkidOnError)-->
-<!--                                                .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, function (payload) {-->
-<!--                                                    const code = payload.code;-->
-<!--                                                    const deviceId = payload.device_id;-->
-<!---->
-<!--                                                    VKID.Auth.exchangeCode(code, deviceId)-->
-<!--                                                        .then(vkidOnSuccess)-->
-<!--                                                        .catch(vkidOnError);-->
-<!--                                                });-->
-<!---->
-<!--                                            function vkidOnSuccess(data) {-->
-<!--                                                console.log(data)-->
-<!--                                                // Обработка полученного результата-->
-<!--                                            }-->
-<!---->
-<!--                                            function vkidOnError(error) {-->
-<!--                                                console.log(error)-->
-<!--                                                // Обработка ошибки-->
-<!--                                            }-->
-<!--                                        }-->
-<!--                                    </script>-->
-<!--                                </div>-->
 
                             </div>
                         </div>

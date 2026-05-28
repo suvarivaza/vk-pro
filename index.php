@@ -1,6 +1,6 @@
 <?php
 
-//var_dump("OK"); die;
+//echo "OK"; die;
 ini_set('memory_limit', '512M');
 
 
@@ -45,7 +45,6 @@ foreach (Config::$links as $link) {
 }
 
 //Задаем мета теги
-
 $app->Title->add('meta', array(
     'name' => 'viewport',
     'content' => 'width=device-width, initial-scale=1',
@@ -184,12 +183,13 @@ if ($service != 'Admin')
 
 
 //Если польлзователь не авторизирован добавляем скрипты для логина
-if (!$app->UserIsAuth())
-{
-    $app->Title->addScripts([
-        '//ulogin.ru/js/ulogin.js',
-    ]);
-}
+//ulogin.ru больше не работает! не загружаем!
+//if (!$app->UserIsAuth())
+//{
+//    $app->Title->addScripts([
+//        '//ulogin.ru/js/ulogin.js',
+//    ]);
+//}
 
 
 //https://ulogin.ru/auth.php?name=vkontakte&window=1&lang=ru&fields=first_name,last_name,email,sex,photo,photo_big&force_fields=&popup_css=&host=vk-pro.top&optional=city,country,phone,nickname,bdate&redirect_uri=https%3A%2F%2Fvk-pro.top%2Fusers%2Fsocial%2Fauth&verify=&callback=&screen=1536x864&url=&providers=vkontakte&hidden=&m=0&page=https%3A%2F%2Fvk-pro.top%2F&icons_32=&icons_16=&theme=classic&client=&version=4

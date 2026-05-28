@@ -1,82 +1,67 @@
 
-server =  www-root@83.136.232.20
-pathSite = /var/www/www-root/data/www/vk-pro.top/
-pathErrorsLog = /var/www/www-root/data/logs/vk-pro.top.error.log
-pathAccessLog = /var/www/www-root/data/logs/vk-pro.top.access.log
-
-
-#screen -S download_site
-#screen -x download_site
-
-
-ssh-connect: ## connect to server by ssh
-	ssh -t $(server) 'cd $(pathSite); bash'
-
-
-ssh-download-archive: ## download archive tar.gz by ssh
-	ssh $(server) 'cd $(pathSite) && tar --exclude='./img' -vczf - ./' >site.tar.gz
-
-
-unzip-archive: ## unzip archive tar.gz
-	tar -xvf site.tar.gz -C ./
-
-
-ssh-download-files: ## download archive gzip by ssh and unzip immediately
-	ssh $(server) 'cd $(pathSite) && tar --exclude='./img' -vczf - ./' | tar  xzf -
-
-
-ssh-reload-files-only-one-folder: ## download files from specific dir by ssh
-	ssh $(server) 'cd $(pathSite) && tar -vczf - ./storage/ai_images' | tar  xzf -
-
-
-ssh-download-db: ## download db dump by ssh
-	ssh $(server) "mysqldump -u userName -p123456 dbName | gzip" > db.sql.gz
-	gunzip db.sql.gz
-
-
-ssh-import-db:
-	ssh $(server) 'mysql -u userName -p123455 dbName < db.sql'
-
+SSH_SERVER =  www-root@83.136.232.20
+PATH_SITE = /var/www/www-root/data/www/vk-pro.top/
+PATH_SITE_LOGS = /var/www/www-root/data/www/vk-pro.top/logs
+PATH_ERRORS_LOG = /var/www/www-root/data/logs/vk-pro.top.error.log
+PATH_ACCESS_LOG = /var/www/www-root/data/logs/vk-pro.top.access.log
 
 
 ########## Logs ###########
 ## @echo ======= Logs =======
 
-read-server-errors-logs: ## read log file (first do: make ssh-connect)
-	cat $(pathErrorsLog) | sort | uniq -c | sort -nr | head -n 15
+# чтение файла
+.PHONY: read-all-logs
+read-all-logs: ## read-all-logs
+	tail -Fv -n 100 $(PATH_SITE_LOGS)/*.log
 
-read-server-errors-logs-real-time: ## read file in realtime (first do: make ssh-connect)
-	tail -f -n 10 -s 1 $(pathErrorsLog)
-
-find-file: ## find file by name (first do: make ssh-connect)
-	find . -name "fileName"
-
-search-in-files: ## find string in files (first do: make ssh-connect)
-	grep -r "406182" /var/log/
+.PHONY: read-errors-log
+read-errors-log: ## read file in realtime (first do: make ssh-connect)
+	tail -f -n 100 -s 1 $(PATH_ERRORS_LOG)
 
 
-show-top-ip: ## показать топ айпи адресов с большим количеством запросов (first do: make ssh-connect)
-	grep "19/Aug/2023:02" $(pathAccessLog) | awk "{print $1}" | sort | uniq -c | sort -nr | head -n 10
+#.PHONY: delete-all-logs
+#delete-all-logs: ## delete-app-logs
+#	find $(PATH_SITE_LOGS) \
+#	-mindepth 1 \
+#	! -path "$(PATH_SITE_LOGS)/crons*" \
+#	! -name ".htaccess" \
+#	-delete
+
+.PHONY: delete-all-logs
+delete-all-logs: ## delete-app-logs
+	rm -rf $(PATH_SITE_LOGS)/*
 
 
-show-count-requests: ## показать топ айпи адресов с большим количеством запросов
-	grep -c "19/Aug/2023:02" $(pathAccessLog)
 
 
-########## SECURITY ###########
+ssh-connect: ## connect to server by ssh
+	ssh -t $(SSH_SERVER) 'cd $(PATH_SITE); bash'
 
-# показать изменения в php файлах за последние n минут
-# find /var/www/chatgpt/data/www/chatgpt4rus.ru/ -type f -mmin -14400 -iname '*.php*'
-n = 60*24
-.PHONY: show-changes-in-php-files
-show-changes-in-php-files:
-	ssh $(server) 'find $(pathSite) -type f -mmin -$(n) -iname '*.php*''
 
-# показать изменения во всех файлах за последние n минут
-n = 1440
-.PHONY: show-changes-in-files
-show-changes-in-files:
-	ssh $(server) 'find $(pathSite) -type f -mmin -$(n)'
+########## Files ###########
+
+ssh-download-archive: ## download archive tar.gz by ssh
+	ssh $(SSH_SERVER) 'cd $(PATH_SITE) && tar --exclude='./img' -vczf - ./' >site.tar.gz
+
+unzip-archive: ## unzip archive tar.gz
+	tar -xvf site.tar.gz -C ./
+
+ssh-download-files: ## download archive gzip by ssh and unzip immediately
+	ssh $(SSH_SERVER) 'cd $(PATH_SITE) && tar --exclude='./img' -vczf - ./' | tar  xzf -
+
+ssh-reload-files-only-one-folder: ## download files from specific dir by ssh
+	ssh $(SSH_SERVER) 'cd $(PATH_SITE) && tar -vczf - ./storage/ai_images' | tar  xzf -
+
+
+########## Database ###########
+
+ssh-download-db: ## download db dump by ssh
+	ssh $(SSH_SERVER) "mysqldump -u userName -p123456 dbName | gzip" > db.sql.gz
+	gunzip db.sql.gz
+
+ssh-import-db:
+	ssh $(SSH_SERVER) 'mysql -u userName -p123455 dbName < db.sql'
+
 
 
 
