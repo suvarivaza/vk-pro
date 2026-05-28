@@ -10,7 +10,6 @@ class Controller_Admin_Logs extends Controller_Admin
 
         $path = VAR_PATH . 'logs/crons/'; //путь до каталога с лог файлами
 
-
         $uri = $this->_request->rawServer['DOCUMENT_URI'];
         if($uri === '/admin/system/logs/grabber-run')
             $fileName = 'Grabber-Run.log';
@@ -38,15 +37,17 @@ class Controller_Admin_Logs extends Controller_Admin
             $fileName = 'Users-Bonus-Day.log';
 
 
-        $file = new \SplFileObject($path . $fileName);
-        $file->seek(PHP_INT_MAX); //ставим курсор на последнюю строку
-        $total_lines = $file->key(); //получаем номер последней строки
-        $countRows = $total_lines > 1000 ? 1000 : $total_lines; //сколько забираем строк 
-        $file->seek($total_lines - $countRows); //смещаем курсор (забираем последние строки)
         $rows = [];
-        while (!$file->eof()) {
-            $rows[] = $file->current();
-            $file->next();
+        if(file_exists($path . $fileName)){
+            $file = new \SplFileObject($path . $fileName);
+            $file->seek(PHP_INT_MAX); //ставим курсор на последнюю строку
+            $total_lines = $file->key(); //получаем номер последней строки
+            $countRows = $total_lines > 1000 ? 1000 : $total_lines; //сколько забираем строк
+            $file->seek($total_lines - $countRows); //смещаем курсор (забираем последние строки)
+            while (!$file->eof()) {
+                $rows[] = $file->current();
+                $file->next();
+            }
         }
 
         $vars = [

@@ -5,6 +5,9 @@ PATH_SITE_LOGS = /var/www/www-root/data/www/vk-pro.top/logs
 PATH_ERRORS_LOG = /var/www/www-root/data/logs/vk-pro.top.error.log
 PATH_ACCESS_LOG = /var/www/www-root/data/logs/vk-pro.top.access.log
 
+.PHONY: deploy
+deploy: ## deploy-force from git repo
+	git fetch origin && git reset --hard origin/main
 
 ########## Logs ###########
 ## @echo ======= Logs =======
@@ -14,22 +17,25 @@ PATH_ACCESS_LOG = /var/www/www-root/data/logs/vk-pro.top.access.log
 read-all-logs: ## read-all-logs
 	tail -Fv -n 100 $(PATH_SITE_LOGS)/*.log
 
+.PHONY: read-all-cron-logs
+read-all-cron-logs: ## read-all-logs
+	tail -Fv -n 100 $(PATH_SITE_LOGS)/crons/*.log
+
 .PHONY: read-errors-log
 read-errors-log: ## read file in realtime (first do: make ssh-connect)
 	tail -f -n 100 -s 1 $(PATH_ERRORS_LOG)
 
 
+.PHONY: delete-all-logs
+delete-all-logs: ## delete-all-logs
+	find $(PATH_SITE_LOGS) \
+	-mindepth 1 \
+	! -path "$(PATH_SITE_LOGS)/crons*" \
+	-delete
+
 #.PHONY: delete-all-logs
 #delete-all-logs: ## delete-app-logs
-#	find $(PATH_SITE_LOGS) \
-#	-mindepth 1 \
-#	! -path "$(PATH_SITE_LOGS)/crons*" \
-#	! -name ".htaccess" \
-#	-delete
-
-.PHONY: delete-all-logs
-delete-all-logs: ## delete-app-logs
-	rm -rf $(PATH_SITE_LOGS)/*
+#	rm -rf $(PATH_SITE_LOGS)/*
 
 
 
