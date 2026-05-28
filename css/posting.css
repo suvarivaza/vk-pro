@@ -1,0 +1,245 @@
+.page_block {
+    position: relative;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+    margin: 15px 0 0;
+    padding: 10px;
+}
+
+.page_block_add
+{
+    margin-left: 30px;
+    margin-right: 20px;
+}
+.c_post_field
+{
+    min-height: 100px;
+}
+.submit_post
+{
+    background: #fafbfc;
+    border-top: 1px solid #e7e8ec;
+    padding: 15px 0;
+    border-radius: 0 0 2px 2px;
+}
+.c_div_emoji, .c_div_button_popup
+{
+    position: absolute;
+    right: -8px;
+    top: 35px;
+    width: 292px;
+    z-index: 100;
+
+}
+.c_div_button_popup
+{
+    width: auto;
+}
+.c_div_emoji_container, .c_div_button_popup_container
+{
+    position: relative;
+    border: 1px solid #c5d0db;
+    border-radius: 5px;
+    background: #ffffff;
+    height: 300px;
+    overflow-y: scroll;
+}
+.c_div_button_popup_container
+{
+    height: auto;
+    overflow-y: hidden;
+}
+.c_div_emoji_angle, .c_div_button_popup_angle
+{
+    position: absolute;
+    right: 20px;
+    top: -8px;
+    z-index: 100;
+    background-color: #ffffff;
+    color: #c5d0db;
+}
+.c_div_emoji_scroll div
+{
+    color: #939393;
+    padding: 5px;
+}
+
+.c_div_emoji_scroll a
+{
+    padding: 4px;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.c_div_emoji_scroll a:hover
+{
+    background-color: #c5d0db;
+}
+.c_div_icon
+{
+    display: inline-block;
+    cursor: pointer;
+    padding: 3px;
+    margin: 0;
+}
+
+.post_button_photo
+{
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url(/img/icons/32/vk/post_icon.png) 0 -69px;
+}
+.post_button_photo:hover, .post_button_video:hover, .post_button_poll:hover
+{
+    opacity: 0.7;
+}
+
+.post_button_video
+{
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url(/img/icons/32/vk/post_icon.png) 0 -91px;
+}
+.post_button_poll
+{
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url(/img/icons/32/vk/post_icon.png) 0 -201px;
+}
+.post_button_link
+{
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url(/img/icons/32/vk/link.png) no-repeat;
+}
+.post_button_ads
+{
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url(/img/icons/32/vk/post_icon.png) 0 -310px;
+}
+
+.uploader_file
+{
+    width: 55px;
+    height: 55px;
+    display: inline-flex;
+    align-content: center;
+    justify-content: center;
+}
+.uploader_file a
+{
+    display: inline-flex;
+}
+.uploader_file a img
+{
+    object-fit: contain;
+}
+
+.c_video_add
+{
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    font-size: 24px;
+}
+.play_button
+{
+    display: none;
+}
+.c_video_preview:hover .play_button
+{
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -40px;
+    margin-left: -20px;
+}
+.post_image
+{
+    margin: 0 10px 10px 0;
+    display: inline-block;
+    float: left;
+}
+.post_author a
+{
+    color: #2a5885;
+    font-weight: bold;
+}
+.post_content
+{
+    color: #000000;
+    font-size: 13px;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,Open Sans,Helvetica Neue,sans-serif;
+}
+
+.c_attachments_photo
+{
+    width: 125px;
+    height: 90px;
+    object-fit: contain;
+}
+.c_gallery_link
+{
+    cursor: pointer;
+}
+.c_attachments_url
+{
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid rgba(0,20,51,.12);
+    position: relative;
+}
+.c_attachments_poll
+{
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid rgba(0,20,51,.12);
+}
+.c_attachments_poll_title
+{
+    color: #42648b;
+    font-weight: 700;
+}
+.c_attachments_poll_answer
+{
+    margin-top: 10px;
+}
+.c_attachments_poll_open
+{
+    color: #939393;
+}
+.c_ads_h5
+{
+    color: #42648b;
+    font-weight: 700;
+}
+
+.post_actions
+{
+
+}
+.c_ads_div
+{
+    padding: 0 0 0 20px;
+    background: url(/img/icons/32/vk/post_icon.png) 0 -310px no-repeat;
+    color: #939393;
+}

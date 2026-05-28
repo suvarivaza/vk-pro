@@ -1,0 +1,7 @@
+User-agent: Yandex
+Allow: *
+Disallow: /admin
+Disallow: /scripts
+Disallow: /styles
+Disallow: /images
+Host: vk-pro.top

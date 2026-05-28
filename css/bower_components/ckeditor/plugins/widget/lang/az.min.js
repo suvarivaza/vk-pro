@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("widget","az",{move:"Tıklayın və aparın",label:"%1 vidjet"});

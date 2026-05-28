@@ -1,0 +1,188 @@
+<?php
+session_start();
+include "config/config.php";
+include "config/autoload.php";
+
+if ($_SERVER['HTTP_HOST'] == 'www.' . DOMAIN)
+{
+    $response = new \System\HttpResponse();
+    $response->setLocation('https://' . DOMAIN);
+    echo $response;
+    exit;
+}
+
+$app = new \System\App();
+
+$app->Title->append('Бесплатная накрутка лайков, друзей и подписчиков в VK без заданий');
+$app->Title->Description = 'Качественная, бесплатная и безопасная накрутка вконтакте - друзей, подписчков, лайков, репостов, раскрутка и монетизация групп vk - автопопстинг, граббер - автоведение групп. Быстрый вывод видео в топ, накрутка просмотров вк!';
+$app->Title->Keywords = 'накрутка, лайков, репостов, накрутка репостов, друзей, подписчиков, накрутка подписчиков, автопостинг вк, граббер vk, автоведение групп вконтакте, vk, vkontakte, раскрутка, монетизация групп, вывод видео в топ, вывод в топ, качественная накрутка, накрутка вконтакте, безопасная накрутка, репосты, друзья, лайки, просмотры, подписчики';
+$app->Title->add('meta', array(
+    'charset' => 'UTF-8'
+));
+
+foreach (Config::$links as $link) {
+
+    $app->Title->add('link', $link);
+}
+
+$app->Title->add('meta', array(
+    'name' => 'viewport',
+    'content' => 'width=device-width, initial-scale=1',
+));
+
+$app->Title->add('meta', array(
+    'name' => 'yandex-verification',
+    'content' => 'a1a382774268ce36',
+));
+
+$app->Title->add('meta', [
+    'name' => 'msvalidate.01',
+    'content' => 'C75F14735539F953D04F1DFE5EB286A0'
+]);
+$app->Title->add('meta', [
+    'name' => 'wmail-verification',
+    'content' => 'a246fed7bf99c88ff04ccfce0b144d4e'
+]);
+$app->Title->add('meta', array(
+    'name' => 'google-site-verification',
+    'content' => 'NaF6QcXFl3HWvcK1sYWGnB9sY_ta0sZLTMAz6PLCHcY'
+));
+
+$app->Title->add('meta', array(
+    'name' => 'robots',
+    'content' => 'index, follow'
+));
+
+$app->Title->add('link', array(
+    'rel'  => 'icon',
+    'href' => '/favicon.png?1',
+    'type' => 'image/png'
+));
+
+$app->Title->add('link', array(
+    'rel'  => 'shortcut icon',
+    'href' => '/favicon.png?1',
+    'type' => 'image/png'
+));
+
+$app->Title->addStyles(array(
+    '/css/fonts.min.css',
+    '/css/bootstrap.min.css',
+    '/css/lightgallery.css',
+    '/css/lg-transitions.min.css',
+));
+
+$_SERVER['REDIRECT_URL'] = isset($_SERVER['REDIRECT_URL'])?$_SERVER['REDIRECT_URL']:$_SERVER['DOCUMENT_URI'];
+
+if ($_SERVER['REDIRECT_URL'] == '/js/jquery/tinymce/plugins/moxiemanager/api.php')
+{
+    $_SERVER['REDIRECT_URL'] = '/system/moxiemanager/api';
+}
+
+$path = trim($_SERVER['REDIRECT_URL']);
+list(,$service) = explode('/', $path);
+if ($service)
+{
+    $routing_path = substr($path, strlen($service) + 2);
+    if ($routing_path === false)
+        $routing_path = '';
+
+    if (isset(Config::$services[$service]))
+    {
+        $service = Config::$services[$service];
+    }
+    else
+    {
+        $service = 'Pages';
+        $routing_path = $path;
+    }
+
+    $class = '\\Service\\' . $service . '\\Controller_Router';
+}
+else
+{
+    $routing_path = '';
+    $class = '\\Service\\System\\Controller_Router';
+}
+
+if ($service != 'Admin')
+{
+    $app->Title->addScripts(array(
+        '/js/jquery/jquery-1.11.0.min.js',
+        '/js/jquery/jquery.cookie.js',
+        '/js/jquery/jquery.maskedinput.min.js',
+        '/js/bootstrap.min.js',
+    ));
+
+    $app->Title->addScripts([
+        '/js/lg/lightgallery.min.js',
+        '/js/lg/lg-thumbnail.min.js',
+        '/js/lg/lg-fullscreen.min.js',
+        '/js/floating-labels.min.js',
+        '/js/init.min.js',
+        '/js/messages.min.js?ver=1.1'
+    ]);
+
+    $app->Title->addStyle('/css/styles.min.css?v=2.0');
+}
+
+if (!$app->UserIsAuth())
+{
+    $app->Title->addScripts([
+        '//ulogin.ru/js/ulogin.js',
+        '/js/login.min.js'
+    ]);
+}
+
+/** @var \System\Service_Controller_Router_Rewrite $router */
+$router = new $class($app);
+
+$response = $router->Action(array('__routing_path' => $routing_path));
+
+if ($response->getStatus() != \System\HttpResponse::S2_OK)
+{
+    \STPL::RestorePaths(array());
+    \STPL::PathRegister( ENGINE_PATH . 'engine/Service/System/Template/');
+    $response->setBody(\STPL::Fetch(
+        'blank', array(
+            'service' => $service,
+            'path' => $routing_path,
+            'app' => $app,
+            'html' => \STPL::Fetch('controls/404', array())
+        )
+    ));
+    echo $response;
+    exit;
+}
+
+$res = clone $response;
+
+if (!in_array($res->getContentType(), array('application/json', 'text/javascript', 'text/xml', 'application/xml', 'image/png', 'text/csv', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')) )
+{
+    $template = 'blank';
+
+    if (!$service)
+    {
+        $app->Title->addStyle('/css/main.min.css?1.3');
+        $template = 'main_new';
+    }
+    if ($service == 'Pages')
+    {
+        $app->Title->addStyle('/css/pages.min.css?1.3');
+        $template = 'pages';
+    }
+    \STPL::RestorePaths(array());
+    \STPL::PathRegister( ENGINE_PATH . 'engine/Service/System/Template/');
+    $res->setBody(
+        \STPL::Fetch(
+            $template, array(
+                'service' => $service,
+                'path' => $routing_path,
+                'app' => $app,
+                'html' => $response->getBody()
+            )
+        )
+    );
+}
+
+echo $res;

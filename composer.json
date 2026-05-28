@@ -1,0 +1,13 @@
+{
+  "require": {
+    "php": ">=7.1",
+    "ext-curl": "^7.3",
+    "yoomoney/yookassa-sdk-php": "^2.0",
+    "ext-json": "*",
+    "ext-posix": "*",
+    "ext-imagick": "*",
+    "ext-memcache": "*",
+    "ext-imap": "*",
+    "guzzlehttp/guzzle": "^7.3"
+  }
+}

@@ -1,0 +1,65 @@
+<?php
+/** @var \Service\Users\Model_Users_User $user */
+$user = $vars['user'];
+/** @var \Service\Tasks\Model_Tasks_Task[] $tasks */
+$tasks = $vars['tasks'];
+?>
+<div style="background-color: #5b7196; height: 74px; box-shadow: 3px 3px 9px #999">
+    <table style="width: 100%; height: 100%; border: 0;" border="0" cellpadding="10">
+        <tr>
+            <td>
+                <a href="https://vk-pro.top">
+                    <img style="max-height: 40px;"
+                         src="data:image/png;base64,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"/>
+                </a>
+            </td>
+            <td style="text-align: right; color: #ffffff;">
+                <?= $user->name; ?>
+            </td>
+        </tr>
+    </table>
+</div>
+<br/>
+<h1>Добрый день, <?= $user->name; ?>!</h1>
+
+<?php if (count($tasks) > 0): ?>
+    <div>Спасибо за проявленный интерес к нашему сервису</div>
+    <div>На данный момент были выполнены следующие Ваши задания:</div>
+    <table style="width: 100%;" cellpadding="5">
+        <tr>
+            <th></th>
+            <th style="text-align: left;">Тип задания</th>
+            <th style="text-align: left;">Описание задания</th>
+            <th style="text-align: right;">Выполнено</th>
+        </tr>
+        <?php foreach ($tasks as $task): $photo = $task->getPhoto(); ?>
+            <tr style="border-bottom: 1px solid #808080;">
+                <td style="border-bottom: 1px solid #5b7196">
+                    <?php if (isset($photo['small'])): ?>
+                        <img src="https://vk-pro.top<?= $photo['small']['url']; ?>"
+                             style="width: 48px;height: 48px; object-fit: cover;"/>
+                    <?php else: ?>
+                        <img src="/img/icons/icon-android.png" style="width: 32px;"/>
+                    <?php endif; ?>
+                </td>
+                <td style="text-align: left;border-bottom: 1px solid #5b7196">
+                    <?= isset($vars['titles'][$task->type]['vkTypes']) ? $vars['titles'][$task->type]['vkTypes'][$task->vkType] : $vars['titles'][$task->type]['title']; ?>
+                </td>
+                <td style="text-align: left;border-bottom: 1px solid #5b7196">
+                    <?= $task->title; ?>
+                </td>
+                <td style="text-align: right;border-bottom: 1px solid #5b7196">
+                    выполнено <strong><?= $task->countReady; ?></strong> из <strong><?= $task->count; ?></strong>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+<?php endif; ?>
+<br/>
+<div style="text-align: center">
+    <a href="https://vk-pro.top"
+       style="display: inline-block; background: #00c576; color: #ffffff; padding: 10px 20px;border-radius: 25px;font-size: 14px;">Добавить
+        еще задание</a>
+</div>
+
+<p>Желаем приятной работы в нашем сервисе, команда VK-PRO</p>

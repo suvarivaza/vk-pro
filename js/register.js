@@ -1,0 +1,46 @@
+var register = {
+    init: function () {
+        $('#i_form_regiter_button_register').click(function(){
+            $.ajax( {
+                type    : "post",
+                dataType: "json",
+                data    : {
+                    action: "register",
+                    login: $('#i_form_register_login').val(),
+                    email: $("#i_form_register_email" ).val(),
+                    password: $("#i_form_register_password").val(),
+                    passwordConfirm: $("#i_form_register_passwordConfirm").val(),
+                },
+                beforeSend: function()
+                {
+                    $('#i_form_regiter_progress').show();
+                    $('#i_form_regiter_button_register').hide();
+                },
+                success : function ( data )
+                {
+                    if (data.success)
+                    {
+                        location.href = '/tasks/all';
+                    }
+                    else
+                    {
+                        $('#i_form_regiter_data').html(data.errorText).show();
+                    }
+                },
+                complete: function(){
+                    $('#i_form_regiter_progress').hide();
+                    $('#i_form_regiter_button_register').show();
+                },
+                error: function()
+                {
+                    alert('Не удалось выполнить запрос. Обратитесь в техподдержку.');
+                    $('#i_form_regiter').modal('hide');
+                }
+            } );
+        });
+    }
+};
+
+$(document).ready(function(){
+    register.init();
+});

@@ -1,0 +1,35 @@
+Array
+(
+    [orderSumAmount] => 49.00
+    [cdd_exp_date] => 0622
+    [shopArticleId] => 459523
+    [paymentPayerCode] => 410012393855702
+    [paymentDatetime] => 2021-01-20T22:55:21.865+03:00
+    [cdd_rrn] => 102091089729
+    [paymentType] => AC
+    [requestDatetime] => 2021-01-20T22:55:22.045+03:00
+    [depositNumber] => mUwLmoPF2C1yW3tmpI1sxzuYuu4Z..000.202101
+    [balance] => 0
+    [nst_eplPayment] => true
+    [cps_user_country_code] => RU
+    [cdd_response_code] => 00
+    [orderCreatedDatetime] => 2021-01-20T22:54:51.121+03:00
+    [action] => paymentAviso
+    [shopId] => 152224
+    [scid] => 145151
+    [shopSumBankPaycash] => 1001
+    [shopSumCurrencyPaycash] => 643
+    [rebillingOn] => false
+    [orderSumBankPaycash] => 1001
+    [orderSumCurrencyPaycash] => 643
+    [unilabel] => 279a9e39-000f-5000-9000-1c4875ce1ace
+    [cdd_pan_mask] => 427638|9027
+    [customerNumber] => 40081
+    [packId] => 1
+    [environment] => Live
+    [month] => 0
+    [invoiceId] => 2002966287637
+    [cdd_auth_code] => 262614
+    [shopSumAmount] => 47.28
+    [md5] => 1B8CCC86FEAEB82B2B2E0950EEEE043D
+)

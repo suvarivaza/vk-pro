@@ -1,0 +1,57 @@
+RewriteEngine On
+
+
+## редирект с www на без www
+RewriteCond %{HTTP_HOST} ^www.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+#Блокируем известные инструменты взлома
+SetEnvIf user-agent "Indy Library" stayout=1
+SetEnvIf user-agent "Wget" stayout=1
+SetEnvIf user-agent "libwww-perl" stayout=1
+SetEnvIf user-agent "Download Demon" stayout=1
+SetEnvIf user-agent "GetRight" stayout=1
+SetEnvIf user-agent "GetWeb!" stayout=1
+SetEnvIf user-agent "Go!Zilla" stayout=1
+SetEnvIf user-agent "Go-Ahead-Got-It" stayout=1
+SetEnvIf user-agent "GrabNet" stayout=1
+SetEnvIf user-agent "TurnitinBot" stayout=1
+SetEnvIf user-agent "SemrushBot" stayout=1
+SetEnvIf user-agent "AhrefsBot" stayout=1
+SetEnvIf user-agent "SputnikBot" stayout=1
+SetEnvIf user-agent "Crowsnest" stayout=1
+SetEnvIf user-agent "PaperLiBot" stayout=1
+SetEnvIf user-agent "peerindex" stayout=1
+SetEnvIf user-agent "ia_archiver" stayout=1
+SetEnvIf user-agent "Slurp" stayout=1
+SetEnvIf user-agent "Aport" stayout=1
+SetEnvIf user-agent "NING" stayout=1
+SetEnvIf user-agent "JS-Kit" stayout=1
+SetEnvIf user-agent "rogerbot" stayout=1
+SetEnvIf user-agent "BLEXBot" stayout=1
+SetEnvIf user-agent "mj12bot" stayout=1
+SetEnvIf user-agent "MJ12bot" stayout=1
+SetEnvIf user-agent "Twiceler" stayout=1
+SetEnvIf user-agent "Baiduspider" stayout=1
+SetEnvIf user-agent "Java" stayout=1
+SetEnvIf user-agent "CommentReader" stayout=1
+SetEnvIf user-agent "Yeti" stayout=1
+SetEnvIf user-agent "discobot" stayout=1
+SetEnvIf user-agent "BTWebClient" stayout=1
+SetEnvIf user-agent "Tagoobot" stayout=1
+SetEnvIf user-agent "Ezooms" stayout=1
+SetEnvIf user-agent "igdeSpyder" stayout=1
+SetEnvIf user-agent "AhrefsBot" stayout=1
+SetEnvIf user-agent "Teleport" stayout=1
+SetEnvIf user-agent "Offline" stayout=1
+SetEnvIf user-agent "DISCo" stayout=1
+SetEnvIf user-agent "netvampire" stayout=1
+SetEnvIf user-agent "Copier" stayout=1
+SetEnvIf user-agent "HTTrack" stayout=1
+SetEnvIf user-agent "WebCopier" stayout=1
+SetEnvIf user-agent "BUbiNG" stayout=1
+SetEnvIf user-agent "MauiBot" stayout=1
+SetEnvIf user-agent "DotBot" stayout=1
+SetEnvIf user-agent "ltx71" stayout=1
+SetEnvIf user-agent "ICC-Crawler" stayout=1
+deny from env=stayout

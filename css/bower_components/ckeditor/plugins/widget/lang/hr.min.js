@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("widget","hr",{move:"Klikni i povuci za pomicanje",label:"%1 widget"});

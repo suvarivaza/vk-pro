@@ -1,0 +1,49 @@
+<?php
+
+namespace Service\Users;
+
+class Controller_State_Client_Referrer extends Controller_State_Client
+{
+    public function actionPrepare()
+    {
+        $this->_application->userPage = 'referrer';
+        $this->_application->Title->Title = 'Партнерская программа';
+
+        $this->_application->Title->add('link', [
+            'rel' => 'icon',
+            'href' => '/img/icons/32/icon-referrer.png',
+            'type' => 'image/png',
+        ]);
+
+        $this->_application->Title->add('link', [
+            'rel' => 'shortcut icon',
+            'href' => '/img/icons/32/icon-referrer.png',
+            'type' => 'image/png',
+        ]);
+        $reponse = parent::actionPrepare();
+
+        if ($reponse !== null) {
+            return $reponse;
+        }
+
+        if (!$this->_application->UserIsAuth()) {
+            return $this->_response->setLocation('/users/login');
+        }
+
+        return null;
+    }
+
+    public function actionGet()
+    {
+        $vars = [
+            'user' => $this->_application->User,
+        ];
+
+        return $this->_response->setBody(\STPL::Fetch('client/referrer', $vars));
+    }
+
+    public function actionPost()
+    {
+        return parent::actionPost();
+    }
+}

@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("widget","ug",{move:"يۆتكەشتە چېكىپ سۆرەڭ",label:"%1 widget"});

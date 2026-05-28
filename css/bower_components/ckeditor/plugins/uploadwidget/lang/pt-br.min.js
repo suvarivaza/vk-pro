@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("uploadwidget","pt-br",{abort:"Envio cancelado pelo usuário.",doneOne:"Arquivo enviado com sucesso.",doneMany:"Enviados %1 arquivos com sucesso.",uploadOne:"Enviando arquivo({percentage}%)...",uploadMany:"Enviando arquivos, {current} de {max} completos ({percentage}%)..."});

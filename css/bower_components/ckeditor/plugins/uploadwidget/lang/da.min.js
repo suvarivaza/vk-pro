@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("uploadwidget","da",{abort:"Upload er afbrudt af brugen.",doneOne:"Filen er uploadet.",doneMany:"Du har uploadet %1 filer.",uploadOne:"Uploader fil ({percentage}%)...",uploadMany:"Uploader filer, {current} af {max} er uploadet ({percentage}%)..."});

@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("widget","es-mx",{move:"Presiona y arrastra para mover",label:"%1 widget"});

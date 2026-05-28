@@ -1,0 +1,77 @@
+MAILTO="42-36-42@mail.ru"
+
+0	0	1	*	*	/var/www/www-root/data/www/vk-pro.top/shell.sh action=Logs/Table:Create
+
+# Сброс активной подписки по достижении даты для граббера
+*/3	*	*	*	*	/var/www/www-root/data/www/vk-pro.top/shell.sh action=Grabber/Grabber:UpdateActive
+
+# Сброс активной подписки по достижении даты для Постинга
+*/4	*	*	*	*	/var/www/www-root/data/www/vk-pro.top/shell.sh action=Posting/Posting:UpdateActive
+
+# Сброс активной подписки по достижении даты для Спецзаданий
+*/15    *   *   *   *   /var/www/www-root/data/www/vk-pro.top/shell.sh action=Tasks/Special:UpdateActive
+
+# Сброс активной подписки по достижении даты для Атобота
+0    */1   *   *   *   /var/www/www-root/data/www/vk-pro.top/shell.sh action=Bot/Bot:UpdateActive
+
+# Граббер собирает посты с подключенных групп
+*/5	*	*	*	*	/var/www/www-root/data/www/vk-pro.top/shell.sh action=Grabber/Grabber:Grab
+
+#Граббер размещает сграбленные посты в группу
+*/1	*	*	*	*	/var/www/www-root/data/www/vk-pro.top/shell.sh action=Grabber/Grabber:Run
+
+#Автопостинг размещает сграбленные посты в группу
+*/1	*	*	*	*	/var/www/www-root/data/www/vk-pro.top/shell.sh action=Posting/Posting:Run
+
+#Обновление лимитов на выполнение задания
+
+#Лимит на минуту
+*/1	*	*	*	*	/var/www/www-root/data/www/vk-pro.top/shell.sh action=Users/Counts:ClearMinute
+#Лимит на 10 минут
+*/10	*	*	*	*	/var/www/www-root/data/www/vk-pro.top/shell.sh action=Users/Counts:Clear10Min
+#Лимит на час
+0	*/1	*	*	*	/var/www/www-root/data/www/vk-pro.top/shell.sh action=Users/Counts:ClearHour
+#Лимит на сутки
+0	1	*/1	*	*	/var/www/www-root/data/www/vk-pro.top/shell.sh action=Users/Counts:ClearDay
+
+#Проверка выполнения задания через 5 минут
+*/5 *   *   *   *   /var/www/www-root/data/www/vk-pro.top/shell.sh action=Tasks/Tasks/Check:check5Min
+
+#Проверка выполнения задания через час
+#0   */1   *   *   *   /var/www/www-root/data/www/vk-pro.top/shell.sh action=Tasks/Tasks/Check:checkHour
+
+#Проверка выполнения задания через сутки
+#59   23   */1   *   *   /var/www/www-root/data/www/vk-pro.top/shell.sh action=Tasks/Tasks/Check:checkDay
+
+#Проверка выполнения задания через месяц
+#0   5   */1   *   *   /var/www/www-root/data/www/vk-pro.top/shell.sh action=Tasks/Tasks/Check:checkMonth
+
+#Сбор статистики пользователей по городам
+*/5 *   *   *   *   /var/www/www-root/data/www/vk-pro.top/shell.sh action=Users/Cities:Run
+
+# Начисление бонуса за выполненные задания
+0  2   *   *   *   /var/www/www-root/data/www/vk-pro.top/shell.sh action=Users/Bonus:Day > /tmp/bonus_err.txt
+
+# Начисление бонуса за выполненую еженедельную норму
+20  2   *   *   1   /var/www/www-root/data/www/vk-pro.top/shell.sh action=Users/Bonus:Week
+
+# Награждение за ежеджевные задания
+0   0   *   *   *   /var/www/www-root/data/www/vk-pro.top/shell.sh action=Users/Bonus:DayTask
+
+# Работа автобота, выполняет задания за пользователей от их имени
+*/1	*	*	*	*	/var/www/www-root/data/www/vk-pro.top/shell.sh action=Bot/Bot:Bot
+
+# Оповещение пользователей о действиях в сервисах
+0   10  *   *   *   /var/www/www-root/data/www/vk-pro.top/shell.sh action=Users/Email:ServiceSend
+
+# Оповещение пользователей о том, что их задания были выполнены
+0   0   *   *   *   /var/www/www-root/data/www/vk-pro.top/shell.sh action=Users/Email:DoneSend
+
+# Ежедневное оповещение со статистикой, сколько заданий сделано, сколько баллов получено
+*/30	*	*	*	*	/var/www/www-root/data/www/vk-pro.top/shell.sh action=Users/Email:Send
+
+#Проверка на "мёртвые" е-майл, что-бы не отправлять на несуществующие ящики и не попасть под спам-фильтр
+10	*/2	*	*	*	/var/www/www-root/data/www/vk-pro.top/shell.sh action=Users/Email:CheckEmails
+
+#Автоведение
+0      */1     *       *       *       /var/www/www-root/data/www/vk-pro.top/shell.sh action=Auto/Groups:Run
